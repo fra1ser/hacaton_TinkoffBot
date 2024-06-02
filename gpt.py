@@ -1,5 +1,5 @@
 import requests
-idcm = "" #id дообученной модели
+idcm = "" #id-дообученной модели
 IAM =  "" #значение IAM-токена сервисного аккаунта.
 folderId = "" #идентификаторкаталога
 def generate_message(query):

@@ -1,6 +1,7 @@
 import json
 from flask import Flask, request, jsonify
 from gpt import generate_message
+from findURL import find_match_url
 app = Flask(__name__)
 @app.route('/assist', methods=['POST'])
 def assist():
@@ -20,20 +21,19 @@ def assist():
     query = data['query']
     print("generation started")
     response_text = generate_message(query)
-    response_links = ["https://www.tinkoff.ru/"]
     try:
         result = json.loads(response_text)
         result_latest = result['result']['alternatives'][0]['message']['text']
-
+        linkSearch = find_match_url(query)
         return jsonify({
             "text": result_latest,
-            "links": response_links
+            "links": linkSearch
         }), 200
     except:
 
         return jsonify({
             "text": "Наблюдаются ошибки в работе бота. Мы постараемся оперативно их решить.",
-            "links": response_links
+            "links": "https://www.tinkoff.ru/help/"
         }), 200
 
 if __name__ == '__main__':

@@ -134,7 +134,8 @@ def text(message):
         }
         response = requests.post("http://127.0.0.1:5000/assist", json=body)
         text_response = response.json()
-        bot.send_message(message.chat.id, f"{text_response['text'] }\n{text_response['links'][0]}")
+
+        bot.send_message(message.chat.id, f"{text_response['text'] }\n{text_response['links']}")
     else:
         bot.send_message(message.chat.id, "Слишком маленький запрос для получения ответа(Минимум 6 символов)")
 #запуск бота
